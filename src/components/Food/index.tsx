@@ -1,19 +1,49 @@
 import { Component } from 'react';
 import { FiEdit3, FiTrash } from 'react-icons/fi';
+import { useState } from 'react';
 
 import { Container } from './styles';
 import api from '../../services/api';
 
-class Food extends Component {
-  constructor(props) {
-    super(props);
+export default function Food({ food }) {
+  // class Food extends Component {
+  // constructor(props) {
+  //  super(props);
+  const { available } = food;
+  // const { available } = this.props.food;
+  //  this.state = {
+  //    isAvailable: available  - inicia como available
+  //  };
+  const [isAvailable, setIsAvailable] = useState(available)
+  // toggleAvailable = async () => { - é uma função
+  //  const { food } = this.props; - já está acima
+  //  const { isAvailable } = this.state; - já está acima
+  //
+  //  await api.put(`/foods/${food.id}`, {
+  //    ...food,
+  //   available: !isAvailable,
+  //  });
+  // 
+  //  this.setState({ isAvailable: !isAvailable }); - true ou false
+  //  }
+  const toggleAvailable = async () => {
+    await api.put(`/foods/${food.id}`, {
+      ...food,
+      available: !isAvailable,
+    });
 
-    const { available } = this.props.food;
-    this.state = {
-      isAvailable: available
-    };
+    setIsAvailable(!isAvailable);
   }
 
+  return(
+    
+  )
+}
+  
+  
+
+class Food extends Component {
+  
   toggleAvailable = async () => {
     const { food } = this.props;
     const { isAvailable } = this.state;
@@ -90,3 +120,7 @@ class Food extends Component {
 };
 
 export default Food;
+function useState(): [any, any] {
+  throw new Error('Function not implemented.');
+}
+
