@@ -3,8 +3,21 @@ import { FiEdit3, FiTrash } from 'react-icons/fi';
 
 import { Container } from './styles';
 import api from '../../services/api';
+interface InfoFood {
+  id: number;
+  name: string;
+  description: string;
+  price: string;
+  available: boolean;
+  image: string;
+}
+interface FoodProps{
+  food: InfoFood;
+  handleEditFood: (food: InfoFood) => void;
+  handleDelete: (id: number) => void;
+}
 
-export default function Food({ food, handleEditFood, handleDelete }) {
+export default function Food({ food, handleEditFood, handleDelete }: FoodProps ) {
   // class Food extends Component {
   // constructor(props) {
   //  super(props);
@@ -59,7 +72,7 @@ export default function Food({ food, handleEditFood, handleDelete }) {
             <button
               type="button"
               className="icon"
-              onClick={this.setEditingFood}
+              onClick={setEditingFood}
               data-testid={`edit-food-${food.id}`}
             >
               <FiEdit3 size={20} />
@@ -83,7 +96,7 @@ export default function Food({ food, handleEditFood, handleDelete }) {
                 id={`available-switch-${food.id}`}
                 type="checkbox"
                 checked={isAvailable}
-                onChange={this.toggleAvailable}
+                onChange={toggleAvailable}
                 data-testid={`change-status-food-${food.id}`}
               />
               <span className="slider" />
@@ -92,6 +105,6 @@ export default function Food({ food, handleEditFood, handleDelete }) {
         </section>
       </Container>
   );
-  
+
 }
 
