@@ -1,11 +1,10 @@
-import { Component } from 'react';
-import { FiEdit3, FiTrash } from 'react-icons/fi';
 import { useState } from 'react';
+import { FiEdit3, FiTrash } from 'react-icons/fi';
 
 import { Container } from './styles';
 import api from '../../services/api';
 
-export default function Food({ food }) {
+export default function Food({ food, handleEditFood, handleDelete }) {
   // class Food extends Component {
   // constructor(props) {
   //  super(props);
@@ -34,40 +33,17 @@ export default function Food({ food }) {
 
     setIsAvailable(!isAvailable);
   }
-
-  return(
-    
-  )
-}
-  
-  
-
-class Food extends Component {
-  
-  toggleAvailable = async () => {
-    const { food } = this.props;
-    const { isAvailable } = this.state;
-
-    await api.put(`/foods/${food.id}`, {
-      ...food,
-      available: !isAvailable,
-    });
-
-    this.setState({ isAvailable: !isAvailable });
-  }
-
-  setEditingFood = () => {
-    const { food, handleEditFood } = this.props;
-
+  //  setEditingFood = () => { - é uma função também
+  //    const { food, handleEditFood } = this.props; - handleEditFood vem de props
+  //  
+  //    handleEditFood(food);
+  //  }
+  const setEditingFood = () => {
     handleEditFood(food);
   }
 
-  render() {
-    const { isAvailable } = this.state;
-    const { food, handleDelete } = this.props;
-
-    return (
-      <Container available={isAvailable}>
+  return(
+    <Container available={isAvailable}>
         <header>
           <img src={food.image} alt={food.name} />
         </header>
@@ -115,12 +91,7 @@ class Food extends Component {
           </div>
         </section>
       </Container>
-    );
-  }
-};
-
-export default Food;
-function useState(): [any, any] {
-  throw new Error('Function not implemented.');
+  );
+  
 }
 
